@@ -36,6 +36,7 @@ public class CheckCostInLetterTest extends CommonCondition {
                 .chooseCommitedUsage(testInstance)
                 .clickButtonAddToEstimate()
                 .totalEstimatedCost()
+                .clickEmailEstimateButton()
                 .sendLetter("https://10minutemail.com")
                 .clickOnIncomingLetter()
                 .getTotalEstimatedMonthlyCostFromLetter();

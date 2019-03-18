@@ -283,8 +283,9 @@ public class CalculatorPage extends AbstractPage {
     }
 
 
-    public void clickEmailEstimateButton() {
+    public CalculatorPage clickEmailEstimateButton() {
         emailEstimateButton.click();
+        return this;
     }
 
     public String nameTab() {

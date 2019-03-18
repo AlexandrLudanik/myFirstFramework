@@ -14,12 +14,11 @@ public class PricingPage extends AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//*[@id=\"cloud-site\"]/nav/div/div/ul/li[3]/a")
+    @FindBy(xpath = "//a[@track-name='pricingNav/calculators']")
     private WebElement calculatorButton;
 
 
     public CalculatorPage clickCalculatorButton() {
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(calculatorButton));
         calculatorButton.click();
         logger.info("Click on link 'Calculators'");
         return new CalculatorPage(driver);
