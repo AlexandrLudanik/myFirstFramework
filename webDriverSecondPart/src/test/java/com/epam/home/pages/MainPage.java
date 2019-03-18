@@ -9,7 +9,6 @@ public class MainPage extends AbstractPage {
 
     private final String PAGE_URL = "https://cloud.google.com/";
 
-
     public MainPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -20,7 +19,7 @@ public class MainPage extends AbstractPage {
 
 
     public ProductsPage clickExploreAllProductsButton() {
-        exploreAllProductsButton.click();
+        getClickableElement(exploreAllProductsButton).click();
         logger.info("Click on button 'EXPLORE ALL PRODUCTS'");
         return new ProductsPage(driver);
     }

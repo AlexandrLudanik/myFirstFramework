@@ -7,8 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class MinutEmailPage extends AbstractPage {
 
 
@@ -20,7 +18,7 @@ public class MinutEmailPage extends AbstractPage {
     @FindBy(xpath = "//*[@id='mailAddress']")
     private WebElement emailAddress;
 
-    @FindBy(xpath = "//[@id='ui-id-1']/span[@class='inc-mail-address']")
+    @FindBy(xpath = "//*[@id='ui-id-1']/span[@class='inc-mail-address']")
     private WebElement infoLineAboutLetter;
 
     @FindBy(xpath = "//*[@id=\"mobilepadding\"]/td/table/tbody/tr[1]/td[1]/img")
@@ -35,14 +33,8 @@ public class MinutEmailPage extends AbstractPage {
     }
 
     public MinutEmailPage clickOnIncomingLetter() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(infoLineAboutLetter));
-        try {
-            TimeUnit.SECONDS.sleep(15);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            logger.error("ERROR: element not found");
-        }
-        infoLineAboutLetter.click();
+        getClickableElement(infoLineAboutLetter);
+        getClickableElement(infoLineAboutLetter).click();
         logger.info("Click on incoming letter");
         return this;
     }
