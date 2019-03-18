@@ -58,7 +58,7 @@ public class TestListener implements ITestListener {
     private void saveScreenShot() {
         File screenCapture = ((TakesScreenshot) (DriverSingleton.getWebDriver())).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(screenCapture, new File(".//target//screenshots" + getCurrentTimeAsString() + ".png"));
+            FileUtils.copyFile(screenCapture, new File(".//target//screenshots//screenshot " + getCurrentTimeAsString() + ".png"));
         } catch (IOException e) {
             log.error("Can not create screenshot " + e.getLocalizedMessage());
         }
