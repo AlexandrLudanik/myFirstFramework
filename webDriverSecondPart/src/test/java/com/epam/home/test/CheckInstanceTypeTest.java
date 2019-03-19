@@ -35,6 +35,5 @@ public class CheckInstanceTypeTest extends CommonCondition {
                 .getInstanceType();
 
         assertThat(instanceType, is(containsStringIgnoringCase(testInstance.getInstanceType())));
-
     }
 }

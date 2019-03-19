@@ -13,7 +13,6 @@ public class CheckVMClassTest extends CommonCondition {
     public void checkVMClassText() {
 
         Instance testInstance = InstanceCreator.withCredentialsFromProperty();
-
         String VmClass = new MainPage(driver)
                 .openMainPage()
                 .clickExploreAllProductsButton()
@@ -36,6 +35,5 @@ public class CheckVMClassTest extends CommonCondition {
                 .getVmClass();
 
         assertThat(VmClass, is(containsStringIgnoringCase(testInstance.getVMClass())));
-
     }
 }

@@ -35,6 +35,5 @@ public class CheckRegionTest extends CommonCondition {
                 .getRegion();
 
         assertThat(region, is(containsStringIgnoringCase(testInstance.getDataCenterLocation().substring(0, 9))));
-
     }
 }

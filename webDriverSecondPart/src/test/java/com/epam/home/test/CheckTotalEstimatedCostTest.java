@@ -36,7 +36,5 @@ public class CheckTotalEstimatedCostTest extends CommonCondition {
                 .getTotalEstimatedCost();
 
         assertThat(totalEstimatedCost, is(equalTo("Total Estimated Cost: USD 1,187.77 per 1 month")));
-
-
     }
 }

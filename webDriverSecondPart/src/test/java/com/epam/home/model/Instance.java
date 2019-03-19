@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Instance {
 
-
     private String numberOfInstances;
     private String whatAreTheseInstancesFor;
     private String operationSystem;

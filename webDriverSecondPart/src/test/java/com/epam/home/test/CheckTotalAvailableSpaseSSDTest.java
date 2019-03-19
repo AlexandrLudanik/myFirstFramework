@@ -35,6 +35,5 @@ public class CheckTotalAvailableSpaseSSDTest extends CommonCondition {
                 .getTotalAvailaleLocalSSDspace();
 
         assertThat(totalAvailableSpaseSSD, is(containsStringIgnoringCase(testInstance.getLocalSSD())));
-
     }
 }

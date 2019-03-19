@@ -21,7 +21,7 @@ public class MinutEmailPage extends AbstractPage {
     @FindBy(xpath = "//*[@id='ui-id-1']/span[@class='inc-mail-address']")
     private WebElement infoLineAboutLetter;
 
-    @FindBy(xpath = "//*[@id=\"mobilepadding\"]/td/table/tbody/tr[1]/td[1]/img")
+    @FindBy(xpath = "//*[@id='mobilepadding']/td/table/tbody/tr[1]/td[1]/img")
     private WebElement logoInTable;
 
     @FindBy(xpath = "//td//h3[text()[contains(.,'USD')]]")
