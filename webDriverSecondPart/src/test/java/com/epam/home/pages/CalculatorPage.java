@@ -1,19 +1,17 @@
 package com.epam.home.pages;
 
 import com.epam.home.model.Instance;
+import com.epam.home.utils.StringParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CalculatorPage extends AbstractPage {
 
-    public static String totalEstimatedCost = null;
-    WebDriverWait wait;
+    public static Double totalEstimatedCost;
 
     public CalculatorPage(WebDriver driver) {
         super(driver);
@@ -32,53 +30,29 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(xpath = "//*[@id='select_value_label_40']")
     private WebElement operationSystemDropDownList;
 
-    @FindBy(xpath = "//md-option/div[text()='Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS']")
-    private WebElement freeDebianCentOSCoreOSUbuntuOrOtherUserProvidedOSOption;
-
     @FindBy(xpath = "//*[@id='select_value_label_41']")
     private WebElement vmClassDropDownList;
-
-    @FindBy(xpath = "//*[@id='select_option_60']/div[1]")
-    private WebElement regularOption;
 
     @FindBy(xpath = "//*[@id='select_value_label_42']")
     private WebElement instanceTypeDropDownList;
 
-    @FindBy(xpath = "//*[@id='select_option_70']/div[1]")
-    private WebElement n1Standard8vCPUs8RAM30GbOption;
-
     @FindBy(xpath = "//*[@aria-label='Add GPUs']")
     private WebElement addGPUsCheckbox;
 
-    @FindBy(xpath = "//*[@placeholder=\"Number of GPUs\"]")
+    @FindBy(xpath = "//*[@placeholder='Number of GPUs']")
     private WebElement numberOfGPUsDropDownList;
 
-    @FindBy(xpath = "//div[text()='1']")
-    private WebElement gpuOption;
-
-    @FindBy(xpath = "//*[@placeholder=\"GPU type\"]")
+    @FindBy(xpath = "//*[@placeholder='GPU type']")
     private WebElement gpuTypeDropDownList;
-
-    @FindBy(xpath = "//div[text()='NVIDIA Tesla V100']")
-    private WebElement nVIDIATeslaV100Option;
 
     @FindBy(xpath = "//*[@id='select_value_label_43']")
     private WebElement localSSDDropDownList;
 
-    @FindBy(xpath = "//div[text()='2x375 GB']")
-    private WebElement x2x375GbOption;
-
     @FindBy(xpath = "//*[@id='select_value_label_44']")
     private WebElement datacenterLocationDropDownList;
 
-    @FindBy(xpath = "//*[@id='select_option_196']")
-    private WebElement frankfurtEuropeWest3Option;
-
     @FindBy(xpath = "//*[@id='select_value_label_45']")
     private WebElement commitedUsageDropDownList;
-
-    @FindBy(xpath = "//*[@id='select_option_100']")
-    private WebElement yearOption;
 
     @FindBy(xpath = "//button[@aria-label='Add to Estimate']")
     private WebElement addToEstimateButton;
@@ -107,7 +81,6 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(xpath = "//*[@id='email_quote']")
     private WebElement emailEstimateButton;
 
-
     @FindBy(xpath = "//*[@id='mailAddress']")
     private WebElement emailAddress;
 
@@ -117,21 +90,12 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(xpath = "//button[@aria-label='Send Email']")
     private WebElement sendEmailButton;
 
-    @FindBy(xpath = "//[@id='ui-id-1']/span[@class='inc-mail-address']")
-    private WebElement infoLineAboutLetter;
-
-    @FindBy(xpath = "//*[@id=\"messagesList\"]")
-    private WebElement incomingLetter;
-
-    @FindBy(xpath = "//*[@id=\"mobilepadding\"]/td/table/tbody/tr[1]/td[1]/img")
-    private WebElement logoInTable;
-
-    @FindBy(xpath = "//table//td[2]/h3")
-    private WebElement totalEstimatedMonthlyCostIneLetter;
+    @FindBy(xpath = "//*[@class='cp-header']//iframe")
+    private WebElement iframe;
 
 
     public CalculatorPage enterIntoFrame() {
-        driver.switchTo().frame(driver.findElement(By.xpath("//*[@class='cp-header']//iframe")));
+        driver.switchTo().frame(waitForElement(iframe));
         logger.info("switching to frame");
         return this;
     }
@@ -154,7 +118,6 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-
     public CalculatorPage chooseOperatingSystem(Instance instance) {
         String optionOperatingSystem = String.format("//md-option/div[text()='%s']", instance.getOperationSystem());
         getClickableElement(operationSystemDropDownList).click();
@@ -164,7 +127,6 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-
     public CalculatorPage chooseVMClass(Instance instance) {
         String optionVMClass = String.format("(//md-option/div[text()='%s'])[2]", instance.getVMClass());
         getClickableElement(vmClassDropDownList).click();
@@ -173,7 +135,6 @@ public class CalculatorPage extends AbstractPage {
         logger.info("Choose 'VM Class': " + instance.getVMClass());
         return this;
     }
-
 
     public CalculatorPage chooseInstanceType(Instance instance) {
         String optionInstanceType = String.format("//div[text()[contains(.,'%s')]]", instance.getInstanceType());
@@ -190,7 +151,6 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-
     public CalculatorPage chooseNumberOfGPU(Instance instance) {
         String optionGPU = String.format("//div[text()='%s']", instance.getNumberOfGPU());
         getClickableElement(numberOfGPUsDropDownList).click();
@@ -199,7 +159,6 @@ public class CalculatorPage extends AbstractPage {
         logger.info("Choose 'Number of GPUs': " + instance.getNumberOfGPU());
         return this;
     }
-
 
     public CalculatorPage chooseGPUType(Instance instance) {
         String optionGPUType = String.format("//div[text()='%s']", instance.getGpuType());
@@ -219,16 +178,14 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-
     public CalculatorPage chooseDataCenterLocation(Instance instance) {
-        String optionDataCentrLocation = String.format("//*[@id='select_option_196']/div[text()='%s']", instance.getDataCenterLocation());
+        String optionDataCentrLocation = String.format("//*[@id='select_option_196']/div[text()[contains(.,'%s')]]", instance.getDataCenterLocation());
         getClickableElement(datacenterLocationDropDownList).click();
         logger.info("Click on drop down 'Datacenter location'");
         getClickableElement(By.xpath(optionDataCentrLocation)).click();
         logger.info("Choose 'Datacenter location': " + instance.getDataCenterLocation());
         return this;
     }
-
 
     public CalculatorPage chooseCommitedUsage(Instance instance) {
         String optionCommitedUsage = String.format("(//div[text()='%s'])[2]", instance.getCommittedUsage());
@@ -261,31 +218,18 @@ public class CalculatorPage extends AbstractPage {
         return totalAvailableLocalSSDSpaceInfo.getText();
     }
 
-    public String getCommitmentTerm() {
-        return commitmentTermInfo.getText();
-    }
-
-    public String getEstimatedComponentCost() {
-        return estimatedComponentCostInfo.getText();
-    }
-
-    public String getTotalEstimatedCost() {
-        return totalEstimatedCostInfo.getText();
+    public Double getTotalEstimatedCost() {
+        return StringParser.getDoubleFromString(totalEstimatedCostInfo.getText());
     }
 
     public CalculatorPage totalEstimatedCost() {
-        totalEstimatedCost = totalEstimatedCostInfo.getText().substring(22, 34);
+        totalEstimatedCost = StringParser.getDoubleFromString(totalEstimatedCostInfo.getText());
         return this;
     }
-
 
     public CalculatorPage clickEmailEstimateButton() {
         getClickableElement(emailEstimateButton).click();
         return this;
-    }
-
-    public String nameTab() {
-        return driver.getWindowHandle();
     }
 
     public void openNewTab() {
@@ -298,11 +242,6 @@ public class CalculatorPage extends AbstractPage {
             driver.switchTo().window(tab);
         }
         logger.info("switching in new tab");
-    }
-
-    public void setAddress(String address) {
-        driver.get(address);
-
     }
 
     public MinutEmailPage sendLetter(String address) {
@@ -335,19 +274,5 @@ public class CalculatorPage extends AbstractPage {
     public void clickSendEmailButton() {
         getClickableElement(sendEmailButton).click();
         logger.info("Click on button 'SEND EMAIL'");
-    }
-
-
-    public String getTotalEstimatedMonthlyCostFromLetter() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(logoInTable));
-        return totalEstimatedMonthlyCostIneLetter.getText().substring(0, 12);
-    }
-
-    public void clickOnIncomingLetter() {
-        getClickableElement(infoLineAboutLetter).click();
-    }
-
-    public void switchTabString(String tab) {
-        driver.switchTo().window(tab);
     }
 }

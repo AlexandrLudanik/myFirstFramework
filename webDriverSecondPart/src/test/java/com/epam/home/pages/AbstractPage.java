@@ -24,4 +24,8 @@ public abstract class AbstractPage {
     protected WebElement getClickableElement(WebElement webElement) {
         return new WebDriverWait(driver,45).until(ExpectedConditions.elementToBeClickable(webElement));
     }
+
+    protected WebElement waitForElement(WebElement webElement) {
+        return new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOf(webElement));
+    }
 }

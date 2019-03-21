@@ -15,10 +15,9 @@ public class DriverSingleton {
     private DriverSingleton() {
     }
 
-    public static WebDriver getWebDriver() {
-
-        if (driver == null) {
-            switch (System.getProperty("browser")) {
+    public static WebDriver getDriver(){
+        if (null == driver){
+            switch (System.getProperty("browser")){
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
@@ -29,16 +28,12 @@ public class DriverSingleton {
                 }
             }
             driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-            Runtime.getRuntime().addShutdownHook(
-                    new Thread(new Runnable() {
-                        public void run() {
-                            driver.quit();
-                            driver = null;
-                        }
-                    }));
         }
         return driver;
+    }
+
+    public static void closeDriver(){
+        driver.quit();
+        driver = null;
     }
 }

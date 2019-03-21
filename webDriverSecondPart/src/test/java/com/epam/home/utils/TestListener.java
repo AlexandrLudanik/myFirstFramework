@@ -56,7 +56,7 @@ public class TestListener implements ITestListener {
     }
 
     private void saveScreenShot() {
-        File screenCapture = ((TakesScreenshot) (DriverSingleton.getWebDriver())).getScreenshotAs(OutputType.FILE);
+        File screenCapture = ((TakesScreenshot) (DriverSingleton.getDriver())).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenCapture, new File(".//target//screenshots//screenshot " + getCurrentTimeAsString() + ".png"));
         } catch (IOException e) {
