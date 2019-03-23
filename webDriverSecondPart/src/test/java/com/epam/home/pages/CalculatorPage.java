@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class CalculatorPage extends AbstractPage {
 
-    public static Double totalEstimatedCost;
+    public static Double totalEstimatedCost = null;
 
     public CalculatorPage(WebDriver driver) {
         super(driver);
@@ -57,31 +57,28 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(xpath = "//button[@aria-label='Add to Estimate']")
     private WebElement addToEstimateButton;
 
-    @FindBy(xpath = "(//div[@class='md-list-item-text ng-binding'])[2]")
+    @FindBy(xpath = "//div[text()[contains(.,'VM class')]]")
     private WebElement vMClassInfo;
 
-    @FindBy(xpath = "(//div[@class='md-list-item-text ng-binding'])[3]")
+    @FindBy(xpath = "//div[text()[contains(.,'Instance type')]]")
     private WebElement instanceTypeInfo;
 
-    @FindBy(xpath = "(//div[@class='md-list-item-text ng-binding'])[4]")
+    @FindBy(xpath = "//div[text()[contains(.,'Region')]]")
     private WebElement regionInfo;
 
-    @FindBy(xpath = "(//div[@class='md-list-item-text ng-binding'])[5]")
+    @FindBy(xpath = "//div[text()[contains(.,'Total available local SSD space')]]")
     private WebElement totalAvailableLocalSSDSpaceInfo;
 
-    @FindBy(xpath = "(//div[@class='md-list-item-text ng-binding'])[6]")
+    @FindBy(xpath = "//div[text()[contains(.,'Commitment term')]]")
     private WebElement commitmentTermInfo;
 
-    @FindBy(xpath = "//*[@id='compute']/md-list/md-list-item[7]/div/b")
-    private WebElement estimatedComponentCostInfo;
-
-    @FindBy(xpath = "//*[@id='resultBlock']/md-card/md-card-content/div/div/div/h2/b")
+    @FindBy(xpath = "//b[text()[contains(.,'Total Estimated Cost')]]")
     private WebElement totalEstimatedCostInfo;
 
     @FindBy(xpath = "//*[@id='email_quote']")
     private WebElement emailEstimateButton;
 
-    @FindBy(xpath = "//*[@id='mailAddress']")
+    @FindBy(xpath = "//*[@id='fe_text']")
     private WebElement emailAddress;
 
     @FindBy(xpath = "//input[@type='email']")
@@ -101,103 +98,103 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public CalculatorPage chooseComputerEngine() {
-        getClickableElement(computeEngineLink).click();
+        waitUntilElementBeClicable(computeEngineLink).click();
         logger.info("Click on icon 'COMPUTE ENGINE'");
         return this;
     }
 
     public CalculatorPage inputNumberOfInstances(Instance instance) {
-        getClickableElement(numberOfInstancesField).sendKeys(instance.getNumberOfInstances());
+        waitUntilElementBeClicable(numberOfInstancesField).sendKeys(instance.getNumberOfInstances());
         logger.info("input 'Number of instances': " + instance.getNumberOfInstances());
         return this;
     }
 
     public CalculatorPage inputWhatAreTheseInstancesFor(Instance instance) {
-        getClickableElement(whatAreTheseInstancesForField).sendKeys(instance.getWhatAreTheseInstancesFor());
+        waitUntilElementBeClicable(whatAreTheseInstancesForField).sendKeys(instance.getWhatAreTheseInstancesFor());
         logger.info("input 'What are these instances for?': " + instance.getWhatAreTheseInstancesFor());
         return this;
     }
 
     public CalculatorPage chooseOperatingSystem(Instance instance) {
         String optionOperatingSystem = String.format("//md-option/div[text()='%s']", instance.getOperationSystem());
-        getClickableElement(operationSystemDropDownList).click();
+        waitUntilElementBeClicable(operationSystemDropDownList).click();
         logger.info("Click on drop down 'Operating System / Software'");
-        getClickableElement(By.xpath(optionOperatingSystem)).click();
+        waitUntilElementBeClicable(By.xpath(optionOperatingSystem)).click();
         logger.info("Choose 'Operating System / Software': " + instance.getOperationSystem());
         return this;
     }
 
     public CalculatorPage chooseVMClass(Instance instance) {
         String optionVMClass = String.format("(//md-option/div[text()='%s'])[2]", instance.getVMClass());
-        getClickableElement(vmClassDropDownList).click();
+        waitUntilElementBeClicable(vmClassDropDownList).click();
         logger.info("Click on drop down 'VM Class'");
-        getClickableElement(By.xpath(optionVMClass)).click();
+        waitUntilElementBeClicable(By.xpath(optionVMClass)).click();
         logger.info("Choose 'VM Class': " + instance.getVMClass());
         return this;
     }
 
     public CalculatorPage chooseInstanceType(Instance instance) {
         String optionInstanceType = String.format("//div[text()[contains(.,'%s')]]", instance.getInstanceType());
-        getClickableElement(instanceTypeDropDownList).click();
+        waitUntilElementBeClicable(instanceTypeDropDownList).click();
         logger.info("Click on drop down 'Instance type'");
-        getClickableElement(By.xpath(optionInstanceType)).click();
+        waitUntilElementBeClicable(By.xpath(optionInstanceType)).click();
         logger.info("Choose 'Instance type': " + instance.getInstanceType());
         return this;
     }
 
     public CalculatorPage clickOnCheckboxAddGPUs() {
-        getClickableElement(addGPUsCheckbox).click();
+        waitUntilElementBeClicable(addGPUsCheckbox).click();
         logger.info("Click on checkbox 'Add GPUs'");
         return this;
     }
 
     public CalculatorPage chooseNumberOfGPU(Instance instance) {
         String optionGPU = String.format("//div[text()='%s']", instance.getNumberOfGPU());
-        getClickableElement(numberOfGPUsDropDownList).click();
+        waitUntilElementBeClicable(numberOfGPUsDropDownList).click();
         logger.info("Click on drop down 'Number of GPUs'");
-        getClickableElement(By.xpath(optionGPU)).click();
+        waitUntilElementBeClicable(By.xpath(optionGPU)).click();
         logger.info("Choose 'Number of GPUs': " + instance.getNumberOfGPU());
         return this;
     }
 
     public CalculatorPage chooseGPUType(Instance instance) {
         String optionGPUType = String.format("//div[text()='%s']", instance.getGpuType());
-        getClickableElement(gpuTypeDropDownList).click();
+        waitUntilElementBeClicable(gpuTypeDropDownList).click();
         logger.info("Click on drop down 'GPU type'");
-        getClickableElement(By.xpath(optionGPUType)).click();
+        waitUntilElementBeClicable(By.xpath(optionGPUType)).click();
         logger.info("Choose 'GPU type': " + instance.getGpuType());
         return this;
     }
 
     public CalculatorPage chooseLocalSSD(Instance instance) {
         String optionLocalSSD = String.format("//div[text()='%s']", instance.getLocalSSD());
-        getClickableElement(localSSDDropDownList).click();
+        waitUntilElementBeClicable(localSSDDropDownList).click();
         logger.info("Click on drop down 'Local SSD'");
-        getClickableElement(By.xpath(optionLocalSSD)).click();
+        waitUntilElementBeClicable(By.xpath(optionLocalSSD)).click();
         logger.info("Choose 'Local SSD': " + instance.getLocalSSD());
         return this;
     }
 
     public CalculatorPage chooseDataCenterLocation(Instance instance) {
         String optionDataCentrLocation = String.format("//*[@id='select_option_196']/div[text()[contains(.,'%s')]]", instance.getDataCenterLocation());
-        getClickableElement(datacenterLocationDropDownList).click();
+        waitUntilElementBeClicable(datacenterLocationDropDownList).click();
         logger.info("Click on drop down 'Datacenter location'");
-        getClickableElement(By.xpath(optionDataCentrLocation)).click();
+        waitUntilElementBeClicable(By.xpath(optionDataCentrLocation)).click();
         logger.info("Choose 'Datacenter location': " + instance.getDataCenterLocation());
         return this;
     }
 
     public CalculatorPage chooseCommitedUsage(Instance instance) {
         String optionCommitedUsage = String.format("(//div[text()='%s'])[2]", instance.getCommittedUsage());
-        getClickableElement(commitedUsageDropDownList).click();
+        waitUntilElementBeClicable(commitedUsageDropDownList).click();
         logger.info("Click on drop down 'Commited usage'");
-        getClickableElement(By.xpath(optionCommitedUsage)).click();
+        waitUntilElementBeClicable(By.xpath(optionCommitedUsage)).click();
         logger.info("Choose 'Commited usage': " + instance.getCommittedUsage());
         return this;
     }
 
     public CalculatorPage clickButtonAddToEstimate() {
-        getClickableElement(addToEstimateButton).click();
+        waitUntilElementBeClicable(addToEstimateButton).click();
         logger.info("Click on button 'Add to Estimate'");
         return this;
     }
@@ -228,7 +225,7 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public CalculatorPage clickEmailEstimateButton() {
-        getClickableElement(emailEstimateButton).click();
+        waitUntilElementBeClicable(emailEstimateButton).click();
         return this;
     }
 
@@ -267,12 +264,12 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public void inputEmailAdderess(String address) {
-        getClickableElement(emailField).sendKeys(address);
+        waitUntilElementBeClicable(emailField).sendKeys(address);
         logger.info("input address: " + address);
     }
 
     public void clickSendEmailButton() {
-        getClickableElement(sendEmailButton).click();
+        waitUntilElementBeClicable(sendEmailButton).click();
         logger.info("Click on button 'SEND EMAIL'");
     }
 }

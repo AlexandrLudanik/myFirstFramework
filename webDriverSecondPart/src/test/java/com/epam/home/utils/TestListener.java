@@ -4,6 +4,7 @@ import com.epam.home.driver.DriverSingleton;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
@@ -26,7 +27,6 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-
     }
 
     @Override
@@ -37,7 +37,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult result) {
-
+        saveScreenShot();
     }
 
     @Override
@@ -56,6 +56,8 @@ public class TestListener implements ITestListener {
     }
 
     private void saveScreenShot() {
+        JavascriptExecutor jse = (JavascriptExecutor) DriverSingleton.getDriver();
+        jse.executeScript("window.scrollBy(0,10000)", "");
         File screenCapture = ((TakesScreenshot) (DriverSingleton.getDriver())).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenCapture, new File(".//target//screenshots//screenshot " + getCurrentTimeAsString() + ".png"));

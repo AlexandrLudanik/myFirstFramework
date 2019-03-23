@@ -28,8 +28,8 @@ public class PricingPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        getClickableElement(pricingButton).click();
-        getClickableElement(calculatorLink).click();
+        waitUntilElementBeClicable(pricingButton).click();
+        waitUntilElementBeClicable(calculatorLink).click();
         logger.info("Click on link 'Calculators'");
         return new CalculatorPage(driver);
     }

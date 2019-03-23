@@ -1,8 +1,10 @@
 package com.epam.home.test;
 
-import com.epam.home.pages.CalculatorPage;
+import static com.epam.home.pages.CalculatorPage.totalEstimatedCost;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+
 
 public class CheckCostInLetterTest extends CommonCondition {
 
@@ -12,10 +14,10 @@ public class CheckCostInLetterTest extends CommonCondition {
                 calculatorPage
                 .totalEstimatedCost()
                 .clickEmailEstimateButton()
-                .sendLetter("https://10minutemail.com")
+                .sendLetter("https://10minutemail.net")
                 .clickOnIncomingLetter()
                 .getTotalEstimatedMonthlyCostFromLetter();
 
-        assertThat(totalEstimateCostInLetter, is(equals(CalculatorPage.totalEstimatedCost)));
+        assertThat(totalEstimateCostInLetter, is(equalTo(totalEstimatedCost)));
     }
 }

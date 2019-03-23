@@ -19,7 +19,7 @@ public class MainPage extends AbstractPage {
 
 
     public ProductsPage clickExploreAllProductsButton() {
-        getClickableElement(exploreAllProductsButton).click();
+        waitUntilElementBeClicable(exploreAllProductsButton).click();
         logger.info("Click on button 'EXPLORE ALL PRODUCTS'");
         return new ProductsPage(driver);
     }

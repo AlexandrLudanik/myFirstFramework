@@ -6,4 +6,8 @@ public class StringParser {
         return Double.parseDouble((name.replaceAll("[^\\d.]", ""))
                 .substring(0, (name.replaceAll("[^\\d.]", "")).length()-1));
     }
+
+    public static double getDoubleFromLetter(String name){
+        return Double.parseDouble((name.replaceAll("[^\\d.]", "")));
+    }
 }

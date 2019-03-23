@@ -12,20 +12,27 @@ public abstract class AbstractPage {
 
     protected static WebDriver driver;
     protected final Logger logger = LogManager.getRootLogger();
+    protected final int WAIT_TIMEOUT_SECONDS = 10;
+    protected final int WAIT_TIMEOUT_SECONDS_FOR_RECEIVE_LETTER = 90;
+
 
     protected AbstractPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    protected static WebElement getClickableElement(By by) {
-        return new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(by));
+    protected WebElement waitUntilElementBeClicable(By by) {
+        return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    protected WebElement getClickableElement(WebElement webElement) {
-        return new WebDriverWait(driver,45).until(ExpectedConditions.elementToBeClickable(webElement));
+    protected WebElement waitUntilElementBeClicable(WebElement webElement) {
+        return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
     protected WebElement waitForElement(WebElement webElement) {
-        return new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOf(webElement));
+        return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+    protected WebElement waitUntilLetterComing(WebElement webElement) {
+        return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS_FOR_RECEIVE_LETTER).until(ExpectedConditions.elementToBeClickable(webElement));
     }
 }
