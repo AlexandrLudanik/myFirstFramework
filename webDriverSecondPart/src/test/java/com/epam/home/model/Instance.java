@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Instance {
 
-    private String numberOfInstances;
+    private int numberOfInstances;
     private String whatAreTheseInstancesFor;
     private String operationSystem;
     private String VMClass;
     private String instanceType;
-    private String numberOfGPU;
+    private int numberOfGPU;
     private String gpuType;
     private String localSSD;
     private String dataCenterLocation;
@@ -17,12 +17,12 @@ public class Instance {
 
 
     public Instance(String numberOfInstances, String whatAreTheseInstancesFor, String operationSystem, String VMClass, String instanceType, String numberOfGPU, String gpuType, String localSSD, String dataCenterLocation, String committedUsage) {
-        this.numberOfInstances = numberOfInstances;
+        this.numberOfInstances = Integer.parseInt(numberOfInstances);
         this.whatAreTheseInstancesFor = whatAreTheseInstancesFor;
         this.operationSystem = operationSystem;
         this.VMClass = VMClass;
         this.instanceType = instanceType;
-        this.numberOfGPU = numberOfGPU;
+        this.numberOfGPU = Integer.parseInt(numberOfGPU);
         this.gpuType = gpuType;
         this.localSSD = localSSD;
         this.dataCenterLocation = dataCenterLocation;
@@ -30,11 +30,11 @@ public class Instance {
     }
 
     public String getNumberOfInstances() {
-        return numberOfInstances;
+        return String.valueOf(numberOfInstances);
     }
 
     public void setNumberOfInstances(String numberOfInstances) {
-        this.numberOfInstances = numberOfInstances;
+        this.numberOfInstances = Integer.parseInt(numberOfInstances);
     }
 
     public String getWhatAreTheseInstancesFor() {
@@ -70,11 +70,11 @@ public class Instance {
     }
 
     public String getNumberOfGPU() {
-        return numberOfGPU;
+        return String.valueOf(numberOfGPU);
     }
 
     public void setNumberOfGPU(String numberOfGPU) {
-        this.numberOfGPU = numberOfGPU;
+        this.numberOfGPU = Integer.parseInt(numberOfGPU);
     }
 
     public String getGpuType() {

@@ -14,20 +14,12 @@ public class MinutEmailPage extends AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
-
-    @FindBy(xpath = "//*[@id='fe_text']")
-    private WebElement emailAddress;
-
     @FindBy(xpath = "//*[text()='Google Cloud Platform Price Estimate']")
     private WebElement newLetter;
 
     @FindBy(xpath = "//td//h3[text()[contains(.,'USD')]]")
     private WebElement totalEstimatedMonthlyCostIneLetter;
 
-
-    public String saveEmailAddress() {
-        return emailAddress.getAttribute("value");
-    }
 
     public MinutEmailPage clickOnIncomingLetter() {
         waitUntilLetterComing(newLetter).click();

@@ -15,7 +15,7 @@ public class PricingPage extends AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "(//*[@track-name='pricing'])[1]")
+    @FindBy(xpath = "//*[@track-name='pricing']")
     private WebElement pricingButton;
 
     @FindBy(xpath = "//*[@track-metadata-eventdetail='calculators']")

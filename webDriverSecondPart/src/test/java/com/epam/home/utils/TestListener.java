@@ -57,7 +57,7 @@ public class TestListener implements ITestListener {
 
     private void saveScreenShot() {
         JavascriptExecutor jse = (JavascriptExecutor) DriverSingleton.getDriver();
-        jse.executeScript("window.scrollBy(0,10000)", "");
+        jse.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
         File screenCapture = ((TakesScreenshot) (DriverSingleton.getDriver())).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenCapture, new File(".//target//screenshots//screenshot " + getCurrentTimeAsString() + ".png"));
