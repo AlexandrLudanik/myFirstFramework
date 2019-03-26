@@ -5,10 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.concurrent.TimeUnit;
-
 public class PricingPage extends AbstractPage {
-
 
     public PricingPage(WebDriver driver) {
         super(driver);
@@ -21,13 +18,12 @@ public class PricingPage extends AbstractPage {
     @FindBy(xpath = "//*[@track-metadata-eventdetail='calculators']")
     private WebElement calculatorLink;
 
+    @FindBy(xpath = "//img[@class='cloud-hero__image cloud-hero__image--scaled']")
+    private WebElement image;
+
 
     public CalculatorPage clickCalculatorButton() {
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitUntilElementBeClicable(image);
         waitUntilElementBeClicable(pricingButton).click();
         waitUntilElementBeClicable(calculatorLink).click();
         logger.info("Click on link 'Calculators'");

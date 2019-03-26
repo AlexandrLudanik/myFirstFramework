@@ -260,6 +260,7 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public String saveEmailAddress() {
+        waitUntilElementBeClicable(emailAddress);
         return emailAddress.getAttribute("value");
     }
 

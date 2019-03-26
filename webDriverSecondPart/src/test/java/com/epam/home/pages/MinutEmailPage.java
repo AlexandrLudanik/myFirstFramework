@@ -17,7 +17,7 @@ public class MinutEmailPage extends AbstractPage {
     @FindBy(xpath = "//*[text()='Google Cloud Platform Price Estimate']")
     private WebElement newLetter;
 
-    @FindBy(xpath = "//td//h3[text()[contains(.,'USD')]]")
+    @FindBy(xpath = "//h3[text()[contains(.,'USD')]]")
     private WebElement totalEstimatedMonthlyCostIneLetter;
 
 

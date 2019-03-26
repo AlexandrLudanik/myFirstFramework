@@ -31,7 +31,7 @@ public abstract class AbstractPage {
     protected WebElement waitForElement(WebElement webElement) {
         return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(webElement));
     }
-
+    //wait for incoming letter, MinutEmailPage
     protected WebElement waitUntilLetterComing(WebElement webElement) {
         return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS_FOR_RECEIVE_LETTER).until(ExpectedConditions.elementToBeClickable(webElement));
     }
