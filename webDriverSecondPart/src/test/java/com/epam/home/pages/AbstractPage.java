@@ -20,11 +20,11 @@ public abstract class AbstractPage {
         this.driver = driver;
     }
 
-    protected WebElement waitUntilElementBeClicable(By by) {
+    protected WebElement waitUntilElementPresent(By by) {
         return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    protected WebElement waitUntilElementBeClicable(WebElement webElement) {
+    protected WebElement waitUntilElementPresent(WebElement webElement) {
         return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(webElement));
     }
 

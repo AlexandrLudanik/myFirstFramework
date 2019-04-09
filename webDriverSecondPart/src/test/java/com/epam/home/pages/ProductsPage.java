@@ -16,7 +16,7 @@ public class ProductsPage extends AbstractPage {
     private WebElement seePriceButton;
 
     public PricingPage clickSeeePriceButton() {
-        waitUntilElementBeClicable(seePriceButton).click();
+        waitUntilElementPresent(seePriceButton).click();
         logger.info("Click on button 'SEE PRICING'");
         return new PricingPage(driver);
     }

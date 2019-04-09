@@ -23,9 +23,9 @@ public class PricingPage extends AbstractPage {
 
 
     public CalculatorPage clickCalculatorButton() {
-        waitUntilElementBeClicable(image);
-        waitUntilElementBeClicable(pricingButton).click();
-        waitUntilElementBeClicable(calculatorLink).click();
+        waitUntilElementPresent(image);
+        waitUntilElementPresent(pricingButton).click();
+        waitUntilElementPresent(calculatorLink).click();
         logger.info("Click on link 'Calculators'");
         return new CalculatorPage(driver);
     }

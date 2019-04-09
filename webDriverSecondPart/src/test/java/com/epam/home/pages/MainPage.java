@@ -14,12 +14,12 @@ public class MainPage extends AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//a[@track-name='exploreProducts']")
+    @FindBy(xpath = "//a[@track-name='seeProducts']")
     private WebElement exploreAllProductsButton;
 
 
     public ProductsPage clickExploreAllProductsButton() {
-        waitUntilElementBeClicable(exploreAllProductsButton).click();
+        waitUntilElementPresent(exploreAllProductsButton).click();
         logger.info("Click on button 'EXPLORE ALL PRODUCTS'");
         return new ProductsPage(driver);
     }
